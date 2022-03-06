@@ -1,4 +1,4 @@
-## Title: team Profile Generator
+## Title: Team Profile Generator
 ## Description: 
 Team Profile generator to make a webpage that lists yourt team members as nicely formatted cards for easy management
 ## Table of Contents: 
@@ -18,8 +18,9 @@ Team Profile generator to make a webpage that lists yourt team members as nicely
 - Then you will be able to see a new Index.HTML file get created in the dist folder with your entire Team added as cards when you launch it in the browser.
 
 ## Usage:
-Below you will see a demo of how this Team Profile Generator works.
+Below you will see a demo of how this Team Profile Generator works as well as a screenshot of the outputted Team Profile.
 You can also view the full video at : https://drive.google.com/file/d/1tWDTiOQxvpKd8vJL7aDNaU5rRUis02dV/view
+<img src="./assets/website.png" width="800" height="400" />
 
 ![Demo Gif](./assets/demo/demo.gif)
 ## License: 
