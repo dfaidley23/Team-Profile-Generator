@@ -4,7 +4,7 @@ const Engineer = require("./lib/engineer.js");
 const Intern = require("./lib/intern.js");
 const Manager = require("./lib/manager.js");
 const generateHTML = require('./src/generateHTML');
-const teamArray = [];
+const teamMembers = [];
 
 const addManager = () => {
     return inquirer.prompt ([
@@ -33,8 +33,8 @@ const addManager = () => {
         const  { name, id, email, officeNumber } = managerInput; 
         const manager = new Manager (name, id, email, officeNumber);
 
-        teamArray.push(manager); 
-        console.log(manager); 
+        teamMembers.push(manager); 
+        // console.log(manager); 
     })
 };
 
@@ -75,61 +75,56 @@ const addEmployee = () => {
         },
         {
             type: 'confirm',
-            name: 'confirmAddEmployee',
+            name: 'addEmployees',
             message: 'Would you like to add more team members?',
             default: false
         }
     ])
-    .then(employeeData => {
-        // data for employee types 
+    .then(employeeRes => {
 
-        let { name, id, email, role, github, school, confirmAddEmployee } = employeeData; 
+        let { name, id, email, role, github, school, addEmployees } = employeeRes; 
         let employee; 
 
         if (role === "Engineer") {
             employee = new Engineer (name, id, email, github);
 
-            console.log(employee);
+            // console.log(employee);
 
         } else if (role === "Intern") {
             employee = new Intern (name, id, email, school);
 
-            console.log(employee);
+            // console.log(employee);
         }
 
-        teamArray.push(employee); 
+        teamMembers.push(employee); 
 
-        if (confirmAddEmployee) {
-            return addEmployee(teamArray); 
+        if (addEmployees) {
+            return addEmployee(teamMembers); 
         } else {
-            return teamArray;
+            return teamMembers;
         }
     })
 
 };
 
 
-// function to generate HTML page file using file system 
+// writing the data to the HTML page
 const writeFile = data => {
     fs.writeFile('./dist/index.html', data, err => {
-        // if there is an error 
-        if (err) {
-            console.log(err);
+        // error catcher
+        if (err) {console.log(err);
             return;
-        // when the profile has been created 
-        } else {
-            console.log("Your team profile has been successfully created! Please check out the index.html")
         }
     })
 }; 
 
 addManager()
   .then(addEmployee)
-  .then(teamArray => {
-    return generateHTML(teamArray);
+  .then(teamMembers => {
+    return generateHTML(teamMembers);
   })
-  .then(pageHTML => {
-    return writeFile(pageHTML);
+  .then(htmlData => {
+    return writeFile(htmlData);
   })
   .catch(err => {
  console.log(err);
