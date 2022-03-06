@@ -57,24 +57,21 @@ const generateIntern = function (intern) {
 
 // push array to page 
 generateHTML = (data) => {
-    // array for cards 
+    // a array is defined that will then pupulate the data submitted in the functions to that array and then reutrn that array to the HTML page in the cards
     pageArray = []; 
     for (let i = 0; i < data.length; i++) {
         const employee = data[i];
         const role = employee.getRole(); 
-        // call manager function
         if (role === 'Manager') {
             const managerCard = generateManager(employee);
 
             pageArray.push(managerCard);
         }
-        // call engineer function
         if (role === 'Engineer') {
             const engineerCard = generateEngineer(employee);
 
             pageArray.push(engineerCard);
         }
-        // call intern function 
         if (role === 'Intern') {
             const internCard = generateIntern(employee);
 
@@ -94,7 +91,7 @@ const generateTeamPage = function (employeeCards) {
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Team Profile</title>
+      <title>My Team</title>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
       <link href="https://fonts.googleapis.com/css?family=Public+Sans:300i,300,500&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
