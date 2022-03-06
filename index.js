@@ -1,3 +1,4 @@
+// adding const to contaitn the required modules and files as well as an empty array to store the returned data
 const inquirer = require("inquirer");
 const fs = require("fs");
 const Engineer = require("./lib/engineer.js");
@@ -6,6 +7,7 @@ const Manager = require("./lib/manager.js");
 const generateHTML = require('./src/generateHTML');
 const teamMembers = [];
 
+// prompts to ask for the team managers information
 const addManager = () => {
     return inquirer.prompt ([
         {
@@ -32,24 +34,24 @@ const addManager = () => {
     .then(managerInput => {
         const  { name, id, email, officeNumber } = managerInput; 
         const manager = new Manager (name, id, email, officeNumber);
-
+        // pushing the manager to the array
         teamMembers.push(manager); 
-        // console.log(manager); 
     })
 };
 
+// inquirer prompts for employee data
 const addEmployee = () => {
     return inquirer.prompt ([
         {
             type: 'list',
             name: 'role',
-            message: "Please choose your employee's role",
+            message: "Please choose what you employee's role is",
             choices: ['Engineer', 'Intern']
         },
         {
             type: 'input',
             name: 'name',
-            message: "What's the name of the employee?", 
+            message: "What's is your employee's name?", 
         },
         {
             type: 'input',
@@ -64,19 +66,21 @@ const addEmployee = () => {
         {
             type: 'input',
             name: 'github',
-            message: "Please enter the employee's github username.",
+            message: "Please enter your employee's github name.",
+            // adding a when field to make the prompt only visible when the role is an Engineer
             when: (input) => input.role === "Engineer",
         },
         {
             type: 'input',
             name: 'school',
             message: "Please enter the intern's school",
+            // added code to make the school question only visible to the Intern role
             when: (input) => input.role === "Intern",
         },
         {
             type: 'confirm',
             name: 'addEmployees',
-            message: 'Would you like to add more team members?',
+            message: 'Do you have any more emebers on your team?',
             default: false
         }
     ])
@@ -88,14 +92,10 @@ const addEmployee = () => {
         if (role === "Engineer") {
             employee = new Engineer (name, id, email, github);
 
-            // console.log(employee);
-
         } else if (role === "Intern") {
             employee = new Intern (name, id, email, school);
-
-            // console.log(employee);
         }
-
+        // pushing the returned data the the teamMembers array
         teamMembers.push(employee); 
 
         if (addEmployees) {
